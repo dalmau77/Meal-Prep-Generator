@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom'
+import { Link } from 'react-router-dom';
+import { PageHeader, Button } from 'antd'
+
+
 
 class Header extends Component {
   renderContent() {
@@ -14,21 +17,30 @@ class Header extends Component {
       default:
         return <li><a href='/api/logout'>Logout</a></li>
     }
+
   }
+
   render() {
     return (
-      <nav>
-        <div className='nav-wrapper  light-blue darken-4'>
-          <Link
-            to={this.props.auth ? '/surveys': '/'}
-            className='left brand-logo'>
-            Meal Prepper
-        </Link>
-          <ul className='right grey darken-3'>
-            {this.renderContent()}
-          </ul>
-        </div>
-      </nav>
+      <div className="site-page-header-ghost-wrapper">
+        <PageHeader
+          style={{ backgroundColor: '#003a8c' }}
+          ghost={false}
+          onBack={() => window.history.back()}
+          title="Meal Prep Generator"
+
+          extra={[
+            <Link
+              to={this.props.user ? '/surveys' : '/'}
+              className='left brand-logo'>
+              Generator
+          </Link>,
+            <Button style={{ backgroundColor: '#a8071a' }} key="1" type="primary" >
+              {this.renderContent()}
+            </Button>
+          ]}
+        ></PageHeader>
+      </div>
     )
   }
 }
