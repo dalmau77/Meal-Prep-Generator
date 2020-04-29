@@ -1,3 +1,6 @@
+import Axios from "axios"
+
+
 export function calorie(calories) {
   return {
     type: 'HANDLE_CALORIE_INTAKE',
@@ -22,14 +25,30 @@ export function exclude(exclude) {
     payload: { exclude }
   }
 }
-// export function OnSubmit(calories, time, diet, exclude) {
-//   return {
-//     type: 'HANDLE_ON_SUBMIT',
-//     payload: {
-//       calories: calories,
-//       time: time,
-//       diet: diet,
-//       exclude: exclude
-//     }
-//   }
-// }
+
+export function OnSubmit(time, calories, diet, exclude) {
+  return dispatch => {
+    return dispatch({
+      type: 'HANDLE_ON_SUBMIT',
+      payload: Axios(`https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/mealplans/generate?timeFrame=${time}&targetCalories=${calories}&diet=${diet}&exclude=${exclude}`, {
+        "method": "GET",
+        "headers": {
+          "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
+          "x-rapidapi-key": "effe5e8d05msh6027af72dedf0d8p177413jsn9bbeeec1a90a"
+        },
+        time: time,
+        calories: calories,
+        diet: diet,
+        exclude: exclude
+      })
+        .then(res => {
+          const data = res.data;
+          console.log(data.meals[0])
+          return  data
+        })
+        .catch(err => {
+          console.log(err);
+        })
+    })
+  }
+}

@@ -2,7 +2,8 @@ const defaultState = {
   calories:'',
   time:'',
   diet: '',
-  exclude:''
+  exclude:'',
+  meals: []
 }
 
 export default function landingReducer(state = defaultState, action){
@@ -29,8 +30,19 @@ export default function landingReducer(state = defaultState, action){
     case 'HANDLE_EXCLUDING': {
       return {
         ...state,
-       exclude:  payload.exclude
+        exclude:  payload.exclude
       }
+    }
+    case 'HANDLE_ON_SUBMIT_FUFILLED':{
+      console.log(payload.data)
+      console.log('text')
+      return {
+        ...state,
+        meals: payload.data
+      }
+    }
+    case 'HANDLE_ON_SUBMIT_REJECT':{
+      return console.log('error')
     }
     default: {
       return state;

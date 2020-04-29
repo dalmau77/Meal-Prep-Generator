@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import { calorie, time, diet, exclude } from './landingAction';
+import { calorie, time, diet, exclude, OnSubmit } from './landingAction';
 import { connect } from 'react-redux';
-import Axios from 'axios';
-import qs from 'qs'
+
 
 class Landing extends Component {
   constructor(props) {
@@ -10,15 +9,7 @@ class Landing extends Component {
     this.calorieIntake = this.calorieIntake.bind(this);
     this.onSubmit = this.onSubmit.bind(this)
   }
-  // inputValues({ input, label, meta }) {
 
-  //   return (
-  //     <div>
-  //       <label>{label}</label>
-  //       <input {...input} />
-  //     </div>
-  //   )
-  // }
   calorieIntake = e => {
     const { dispatch } = this.props;
     const { value } = e.target;
@@ -39,35 +30,14 @@ class Landing extends Component {
     const { value } = e.target;
     dispatch(exclude(value));
   }
+
   onSubmit = () => {
-
-    // const data = {
-    //   timeFrame: this.props.time,
-    //   targetCalories: this.props.calories,
-    //   diet: this.props.diet,
-    //   exclude: this.props.exclude
-    // }
-    // console.log(data)
-    const options = {
-      method: 'GET',
-      headers: {
-        "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
-        "x-rapidapi-key": "effe5e8d05msh6027af72dedf0d8p177413jsn9bbeeec1a90a"
-      },
-      // data: qs.stringify(data),
-      url: `https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/mealplans/generate?timeFrame=${this.props.time}&targetCalories=${this.props.calories}&diet=${this.props.diet}&exclude=${this.props.exclude}`
-    };
-    Axios(options)
-      .then(res => console.log(res.data)
-      )
-      .catch(function (error) {
-        console.log(error);
-      });
-
+    const { dispatch } = this.props;
+    dispatch(OnSubmit(this.props.time, this.props.calories, this.props.diet, this.props.exclude))
   }
 
   render() {
-    const meals = this.props
+    console.log(this.props.data)
     return (
       <div style={{ alignContent: 'right' }}>
         <div>
@@ -95,22 +65,16 @@ class Landing extends Component {
           <input type="text" name="exclude" value={this.props.exclude} onChange={this.excluding} />
           <button onClick={this.onSubmit} type="submit">Generate</button>
         </div>
+        <div>
+         {this.props.data}
+        </div>
       </div>
 
     )
   }
 }
 
-// const validate = formValues => {
-//   const errors = {};
-//   if (!formValues.time) {
-//     errors.time = 'you must enter either a day or a week'
-//   }
-//   if (!formValues.calories) {
-//     errors.calories = 'you must enter a calorie amount'
-//   }
-//   return errors
-// }
+
 
 function mapStoreToProps(store) {
   console.log(store)
@@ -118,7 +82,8 @@ function mapStoreToProps(store) {
     calories: store.landing.calories,
     diet: store.landing.diet,
     exclude: store.landing.exclude,
-    time: store.landing.time
+    time: store.landing.time,
+    meals: store.landing.meals
   }
 }
 
