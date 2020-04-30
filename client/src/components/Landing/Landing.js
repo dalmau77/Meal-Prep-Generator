@@ -37,6 +37,7 @@ class Landing extends Component {
   }
  
   render() {
+    console.log(this.props.meals)
     return (
       <div style={{ alignContent: 'right' }}>
         <div>
@@ -65,7 +66,11 @@ class Landing extends Component {
           <button onClick={this.onSubmit} type="submit">Generate</button>
         </div>
         <div>
-         
+          <ul>
+         {this.props.meals.map((item,index) => (
+           <li>{item.title}<button>Save</button></li>
+         ))}
+         </ul>
         </div>
       </div>
 

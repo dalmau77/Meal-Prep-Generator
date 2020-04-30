@@ -8,7 +8,6 @@ const defaultState = {
 
 export default function landingReducer(state = defaultState, action) {
   const { type, payload } = action;
-  console.log(type)
   switch (type) {
     case 'HANDLE_CALORIE_INTAKE': {
       return {
@@ -34,14 +33,13 @@ export default function landingReducer(state = defaultState, action) {
         exclude: payload.exclude
       }
     }
-    case 'ON_SUBMIT': {
-      console.log(payload)
+    case 'ON_SUBMIT_SUCCESS': {
       return {
         ...state,
         meals: payload.meals
       }
     }
-    case 'ON_SUBMIT': {
+    case 'ON_SUBMIT_ERROR': {
       return console.log('error')
     }
     default: {
