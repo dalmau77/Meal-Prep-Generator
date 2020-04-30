@@ -38,6 +38,7 @@ class Landing extends Component {
  
   render() {
     console.log(this.props.meals)
+    console.log(this.props.nutrients)
     return (
       <div style={{ alignContent: 'right' }}>
         <div>
@@ -67,10 +68,19 @@ class Landing extends Component {
         </div>
         <div>
           <ul>
-         {this.props.meals.map((item,index) => (
-           <li>{item.title}<button>Save</button></li>
+         {this.props.meals.map(item => (
+           <li><h3>{item.title}</h3> Servings: {item.servings} 
+           <img src={`https://spoonacular.com/recipeImages/${item.id}-90x90.jpg`} alt="food"/>
+           <a href={`https://api.spoonacular.com/recipes/${item.id}/ingredientWidget`}>Recipes</a>
+           <button>Save</button>
+           </li>
          ))}
          </ul>
+         <p>Calories: {this.props.nutrients.calories}</p>
+         <p>Protein: {this.props.nutrients.protein}</p>
+         <p>Carbs: {this.props.nutrients.carbohydrates}</p>
+         <p>Fat: {this.props.nutrients.fat}</p>
+         
         </div>
       </div>
 
@@ -86,7 +96,8 @@ function mapStoreToProps(store) {
     diet: store.landing.diet,
     exclude: store.landing.exclude,
     time: store.landing.time,
-    meals: store.landing.meals
+    meals: store.landing.meals,
+    nutrients: store.landing.nutrients
   }
 }
 

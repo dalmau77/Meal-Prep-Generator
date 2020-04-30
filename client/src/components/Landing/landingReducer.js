@@ -3,7 +3,8 @@ const defaultState = {
   time: '',
   diet: '',
   exclude: '',
-  meals:[]
+  meals:[],
+  nutrients:[]
 }
 
 export default function landingReducer(state = defaultState, action) {
@@ -36,7 +37,8 @@ export default function landingReducer(state = defaultState, action) {
     case 'ON_SUBMIT_SUCCESS': {
       return {
         ...state,
-        meals: payload.meals
+        meals: payload.meals,
+        nutrients: payload.nutrients
       }
     }
     case 'ON_SUBMIT_ERROR': {
