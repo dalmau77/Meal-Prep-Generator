@@ -35,9 +35,8 @@ class Landing extends Component {
     const { dispatch } = this.props;
     dispatch(OnSubmit(this.props.time, this.props.calories, this.props.diet, this.props.exclude))
   }
-
+ 
   render() {
-    console.log(this.props.data)
     return (
       <div style={{ alignContent: 'right' }}>
         <div>
@@ -66,7 +65,7 @@ class Landing extends Component {
           <button onClick={this.onSubmit} type="submit">Generate</button>
         </div>
         <div>
-         {this.props.data}
+         
         </div>
       </div>
 
@@ -77,7 +76,6 @@ class Landing extends Component {
 
 
 function mapStoreToProps(store) {
-  console.log(store)
   return {
     calories: store.landing.calories,
     diet: store.landing.diet,

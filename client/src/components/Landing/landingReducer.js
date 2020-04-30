@@ -1,13 +1,14 @@
 const defaultState = {
-  calories:'',
-  time:'',
+  calories: '',
+  time: '',
   diet: '',
-  exclude:'',
-  meals: []
+  exclude: '',
+  meals:[]
 }
 
-export default function landingReducer(state = defaultState, action){
+export default function landingReducer(state = defaultState, action) {
   const { type, payload } = action;
+  console.log(type)
   switch (type) {
     case 'HANDLE_CALORIE_INTAKE': {
       return {
@@ -18,30 +19,29 @@ export default function landingReducer(state = defaultState, action){
     case 'HANDLE_DAY_OR_WEEK': {
       return {
         ...state,
-        time:  payload.time
+        time: payload.time
       }
     }
     case 'HANDLE_DIET_CHOICE': {
       return {
         ...state,
-        diet:  payload.diet
+        diet: payload.diet
       }
     }
     case 'HANDLE_EXCLUDING': {
       return {
         ...state,
-        exclude:  payload.exclude
+        exclude: payload.exclude
       }
     }
-    case 'HANDLE_ON_SUBMIT_FUFILLED':{
-      console.log(payload.data)
-      console.log('text')
+    case 'ON_SUBMIT': {
+      console.log(payload)
       return {
         ...state,
-        meals: payload.data
+        meals: payload.meals
       }
     }
-    case 'HANDLE_ON_SUBMIT_REJECT':{
+    case 'ON_SUBMIT': {
       return console.log('error')
     }
     default: {
