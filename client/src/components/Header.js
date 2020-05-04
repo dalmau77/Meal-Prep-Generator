@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { PageHeader, Button } from 'antd'
-
+import Payments from './Payments'
 
 
 class Header extends Component {
@@ -15,32 +14,31 @@ class Header extends Component {
           <li><a href='/auth/google'>Login With Google</a></li>
         )
       default:
-        return <li><a href='/api/logout'>Logout</a></li>
+        return [
+          <li key='1'><Payments /></li>,
+          <li key='3' style={{ margin: '0 10px' }}>
+            Credits: {this.props.auth.credits}
+          </li>,
+          <li key='2'><a href='/api/logout'>Logout</a></li>
+        ];
     }
-
   }
 
   render() {
     return (
-      <div className="site-page-header-ghost-wrapper">
-        <PageHeader
-          style={{ backgroundColor: '#003a8c' }}
-          ghost={false}
-          onBack={() => window.history.back()}
-          title="Meal Prep Generator"
-
-          extra={[
-            <Link
-              to={this.props.user ? '/surveys' : '/'}
-              className='left brand-logo'>
-              Generator
-          </Link>,
-            <Button style={{ backgroundColor: '#a8071a' }} key="1" type="primary" >
-              {this.renderContent()}
-            </Button>
-          ]}
-        ></PageHeader>
-      </div>
+      <nav>
+        <div className='nav-wrapper blue'>
+          <Link
+            key={1}
+            to={this.props.auth ? '/meal-generator' : '/'}
+            className='left brand-logo'>
+            Meal-Generator
+         </Link>
+          <ul className='right'>
+            {this.renderContent()}
+          </ul>
+        </div>
+      </nav>
     )
   }
 }

@@ -1,8 +1,8 @@
 import { combineReducers } from 'redux';
 import authReducer from './authReducer';
-import landingReducer from '../components/Landing/landingReducer'
+import generatorReducer from '../components/Generator/generatorReducer';
 
 export default combineReducers({
   auth: authReducer,
-  landing: landingReducer,
+  generator: generatorReducer,
 })

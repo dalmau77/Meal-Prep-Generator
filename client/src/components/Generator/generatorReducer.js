@@ -7,7 +7,7 @@ const defaultState = {
   nutrients:[]
 }
 
-export default function landingReducer(state = defaultState, action) {
+export default function generatorReducer(state = defaultState, action) {
   const { type, payload } = action;
   switch (type) {
     case 'HANDLE_CALORIE_INTAKE': {
