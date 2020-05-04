@@ -3,7 +3,8 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import {connect} from 'react-redux';
 import * as actions from '../actions';
 import Header from './Header';
-import Landing from './Landing/Landing';
+import Generator from './Generator/Generator';
+import Landing from './Landing/Landing'
 
 // const Dashboard = () => <h2>Dashboard</h2>
 
@@ -19,6 +20,7 @@ class App extends Component {
         <BrowserRouter>
           <div className='container'>
             <Header />
+            <Route exact path='/meal-generator' component={Generator} />
             <Route exact path='/' component={Landing} />
           </div>
         </BrowserRouter>
