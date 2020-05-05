@@ -7,7 +7,8 @@ module.exports = app => {
     const { title } = req.body;
 
     const meal = new Meals({
-      title
+      title,
+      user: req.user.id
     });
     meal.save()
   });
