@@ -44,7 +44,7 @@ class Generator extends Component {
       title: title
     })
 
-    console.log('hi')
+
   }
   componentDidMount() {
     let elems = document.querySelectorAll('.dropdown-trigger');
