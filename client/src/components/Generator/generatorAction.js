@@ -1,6 +1,5 @@
 import Axios from "axios"
 
-
 export function calorie(calories) {
   return {
     type: 'HANDLE_CALORIE_INTAKE',
@@ -29,7 +28,6 @@ export function exclude(exclude) {
   }
 }
 
-
 export function OnSubmit(time, calories, diet, exclude) {
   return function action(dispatch) {
     dispatch({ type: 'ON_SUBMIT' })
@@ -38,7 +36,7 @@ export function OnSubmit(time, calories, diet, exclude) {
       "headers": {
         "x-rapidapi-host": "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com",
         "x-rapidapi-key": "effe5e8d05msh6027af72dedf0d8p177413jsn9bbeeec1a90a",
-        
+
       },
       time: time,
       calories: calories,

@@ -5,14 +5,12 @@ import axios from 'axios';
 import M from 'materialize-css';
 import { Select } from 'react-materialize';
 
-
 class Generator extends Component {
   constructor(props) {
     super(props);
     this.calorieIntake = this.calorieIntake.bind(this);
     this.onSubmit = this.onSubmit.bind(this)
   }
-
   calorieIntake = e => {
     const { dispatch } = this.props;
     const { value } = e.target;
@@ -33,18 +31,14 @@ class Generator extends Component {
     const { value } = e.target;
     dispatch(exclude(value));
   }
-
   onSubmit = () => {
     const { dispatch } = this.props;
     dispatch(OnSubmit(this.props.time, this.props.calories, this.props.diet, this.props.exclude))
   }
-
   saveMealsToDb = (title) => {
     axios.post('/api/savedMeals', {
       title: title
     })
-
-    console.log('hi')
   }
   componentDidMount() {
     let elems = document.querySelectorAll('.dropdown-trigger');
