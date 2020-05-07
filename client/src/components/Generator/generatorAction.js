@@ -57,6 +57,7 @@ export function OnSubmit(time, calories, diet, exclude) {
     );
   }
 }
+//console.log(res.data.items[0].value)
 
 
 

@@ -115,7 +115,7 @@ class Generator extends Component {
         <div>
           {
             this.props.meals.map(item => (
-              <div key={item._id} className='card darken-1'>
+              <div key={item.id} className='card darken-1'>
                 <div className='card-content'>
                   <span className='card-title'>
                     {item.title}
@@ -125,7 +125,7 @@ class Generator extends Component {
                   </div>
                   <a href={`https://api.spoonacular.com/recipes/${item.id}/ingredientWidget`}>Recipes</a>
                   <div>
-                  <button onClick={() => this.saveMealsToDb(item.title, item.id)}>Save</button>
+                    <button onClick={() => this.saveMealsToDb(item.title, item.id)}>Save</button>
                   </div>
                 </div>
               </div>
@@ -142,8 +142,6 @@ class Generator extends Component {
     )
   }
 }
-
-
 
 function mapStoreToProps(store) {
   return {

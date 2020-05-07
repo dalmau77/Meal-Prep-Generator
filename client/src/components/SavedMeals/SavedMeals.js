@@ -7,9 +7,7 @@ class SavedMeals extends Component {
   componentDidMount() {
     this.props.fetchMeals()
   }
-  renderMeals() {
-    console.log(fetchMeals)
-
+  displayMeals() {
     return this.props.savedMeals.map(meal => {
       return (
         <div key={meal._id} className='card darken-1'>
@@ -23,17 +21,14 @@ class SavedMeals extends Component {
             <a href={`https://api.spoonacular.com/recipes/${meal.MealID}/ingredientWidget`}>Recipes</a>
           </div>
         </div>
-
       )
     })
   }
 
-
-
   render() {
     return (
       <div>
-        {this.renderMeals()}
+        {this.displayMeals()}
       </div>
     )
   }
