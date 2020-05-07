@@ -39,9 +39,10 @@ class Generator extends Component {
     dispatch(OnSubmit(this.props.time, this.props.calories, this.props.diet, this.props.exclude))
   }
 
-  saveMealsToDb = (title) => {
+  saveMealsToDb = (title, MealID) => {
     axios.post('/api/savedMeals', {
-      title: title
+      title: title,
+      MealID: MealID
     })
 
 
@@ -112,19 +113,28 @@ class Generator extends Component {
           </div>
         </div>
         <div>
-          <ul>
-            {this.props.meals.map(item => (
-              <li><h3>{item.title}</h3> Servings: {item.servings}
-                <img src={`https://spoonacular.com/recipeImages/${item.id}-90x90.jpg`} alt="food" />
-                <a href={`https://api.spoonacular.com/recipes/${item.id}/ingredientWidget`}>Recipes</a>
-                <button onClick={() => this.saveMealsToDb(item.title)}>Save</button>
-              </li>
-            ))}
-          </ul>
+          {
+            this.props.meals.map(item => (
+              <div key={item.id} className='card darken-1'>
+                <div className='card-content'>
+                  <span className='card-title'>
+                    {item.title}
+                  </span>
+                  <div>
+                    <img src={`https://spoonacular.com/recipeImages/${item.id}-90x90.jpg`} alt="food" />
+                  </div>
+                  <a href={`https://api.spoonacular.com/recipes/${item.id}/ingredientWidget`}>Recipes</a>
+                  <div>
+                    <button onClick={() => this.saveMealsToDb(item.title, item.id)}>Save</button>
+                  </div>
+                </div>
+              </div>
+            ))
+          }
           <h2 style={{ marginLeft: 20 }}>Calories: <p>{this.props.nutrients.calories}</p></h2>
           <h2 style={{ marginLeft: 20 }}>Protein: <p>{this.props.nutrients.protein}</p></h2>
           <h2 style={{ marginLeft: 20 }}>Carbs: <p>{this.props.nutrients.carbohydrates}</p></h2>
-          <h2 style={{ marginLeft: 20, paddingBottom:20 }}>Fat: <p>{this.props.nutrients.fat}</p></h2>
+          <h2 style={{ marginLeft: 20, paddingBottom: 20 }}>Fat: <p>{this.props.nutrients.fat}</p></h2>
 
         </div>
       </div>
@@ -132,8 +142,6 @@ class Generator extends Component {
     )
   }
 }
-
-
 
 function mapStoreToProps(store) {
   return {
