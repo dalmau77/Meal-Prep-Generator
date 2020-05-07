@@ -4,16 +4,13 @@ const requireLogin = require('../middlewares/requireLogin');
 const Meals = mongoose.model('meals');
 
 module.exports = app => {
-
-  let mealArr = [];
-
   app.post('/api/savedMeals', (req, res) => {
-    const { title } = req.body;
+    const { title, MealID } = req.body;
     const meal = new Meals({
       title,
+      MealID,
       user: req.user.id
     });
-    mealArr.push(meal)
     meal.save();
   });
   app.get('/api/savedMeals', requireLogin, async (req, res) => {
